@@ -284,12 +284,16 @@ public class ConnectionUtil {
     }
 
     public static Object getType(byte[] charData, int type) {
+
         switch(type) {
+
             case ColumnType.FIELD_TYPE_LONGLONG:
+                // mysql返回的数据并不是8字节的长整形、或无符号长整形,而是ascii码字符，所以这么处理
                 String longValue = new String(charData);
                 return Long.parseLong(longValue);
             case ColumnType.FIELD_TYPE_VAR_STRING:
                 return new String(charData);
+
         }
 
         return null;

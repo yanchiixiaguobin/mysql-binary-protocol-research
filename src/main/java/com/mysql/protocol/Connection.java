@@ -23,9 +23,10 @@ public class Connection {
     private OutputStream outputStream;
 
     public Connection() {
-        socket = new Socket();
-        OKPacket okPacket = null;
 
+        socket = new Socket();
+
+        OKPacket okPacket = null;
         //三次握手建立连接
         ConnectionUtil.threeHands(socket, ConnectionManager.getHost(), ConnectionManager.getPort());
 
@@ -61,7 +62,7 @@ public class Connection {
         }
 
         //发送SET autocommit=0的命令
-        ConnectionUtil.sendQueryPacket(outputStream,"SET autocommit=0");
+        ConnectionUtil.sendQueryPacket(outputStream,"SET autocommit = 1");
         //解析OK packet包
         okPacket = ConnectionUtil.processOKPacket(inputStream);
         if(okPacket.header!=0x00) {
@@ -88,6 +89,16 @@ public class Connection {
         //发送 query packet包
         ConnectionUtil.sendQueryPacket(this.outputStream, SQL);
         return ConnectionUtil.processResult3(this.inputStream);
+    }
+
+    public void execInsert(String SQL) {
+        // 发送 query packet包
+        // 生成Connection时,记得不要设置set autocommit = 1;否则会显示插入成功，但查询不到，事务没有提交
+        ConnectionUtil.sendQueryPacket(this.outputStream, SQL);
+        OKPacket okPacket = ConnectionUtil.processOKPacket(this.inputStream);
+        LOG.debug("header:{}", okPacket.header);
+        LOG.debug("affectedRows:{}", okPacket.affectedRows);
+        LOG.debug("insertID:{}", okPacket.insertId);
     }
 
 
