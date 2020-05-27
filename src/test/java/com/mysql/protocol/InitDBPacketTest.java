@@ -1,10 +1,12 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.MySQLPacket;
+import com.mysql.protocol.packet.database.InitDBPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -21,9 +23,9 @@ public class InitDBPacketTest {
 	public void produce() {
 		byte[] table = { 't', 'e', 's', 't' };
 		InitDBPacket initDB = new InitDBPacket();
-		initDB.packetId = 2;
+		initDB.packetID = 2;
 		initDB.schema = table;
-		initDB.flag = MysqlPacket.COM_INIT_DB;
+		initDB.flag = MySQLPacket.COM_INIT_DB;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		initDB.write(buffer);
 		buffer.flip();

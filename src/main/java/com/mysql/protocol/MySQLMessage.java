@@ -6,7 +6,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Calendar;
-public class MysqlMessage {
+public class MySQLMessage {
 
 	public static final long NULL_LENGTH = -1;
 	private static final byte[] EMPTY_BYTES = new byte[0];
@@ -15,7 +15,7 @@ public class MysqlMessage {
 	private final int length;
 	private int position;
 
-	public MysqlMessage(byte[] data) {
+	public MySQLMessage(byte[] data) {
 		this.data = data;
 		this.length = data.length;
 		this.position = 0;

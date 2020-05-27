@@ -1,4 +1,4 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
@@ -9,10 +9,12 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.security.NoSuchAlgorithmException;
 
+import com.mysql.protocol.constant.Capabilities;
+import com.mysql.protocol.packet.connect.AuthPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
-import com.jiagu.mysql.protocol.util.SecurityUtil;
+import com.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.SecurityUtil;
 /**
  * 
  * <pre><b>test auth packet.</b></pre>
@@ -48,7 +50,7 @@ public class AuthPacketTest {
 		System.arraycopy(rand2, 0, seed, rand1.length, rand2.length);
 
 		AuthPacket auth = new AuthPacket();
-		auth.packetId = 1;
+		auth.packetID = 1;
 		auth.clientFlags = getClientCapabilities();
 		auth.maxPacketSize = 1024 * 1024 * 1024;
 		auth.user = "root";
@@ -84,7 +86,7 @@ public class AuthPacketTest {
 		System.arraycopy(rand2, 0, seed, rand1.length, rand2.length);
 
 		AuthPacket auth = new AuthPacket();
-		auth.packetId = 1;
+		auth.packetID = 1;
 		auth.clientFlags = getClientCapabilities();
 		auth.maxPacketSize = 1024 * 1024 * 1024;
 		auth.user = "root";

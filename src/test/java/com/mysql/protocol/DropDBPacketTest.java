@@ -1,10 +1,12 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.MySQLPacket;
+import com.mysql.protocol.packet.database.DropDBPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -21,9 +23,9 @@ public class DropDBPacketTest {
 	public void produce() {
 		byte[] table = { 't', 'e', 's', 't' };
 		DropDBPacket dropDB = new DropDBPacket();
-		dropDB.packetId = 2;
+		dropDB.packetID = 2;
 		dropDB.schema = table;
-		dropDB.flag = MysqlPacket.COM_DROP_DB;
+		dropDB.flag = MySQLPacket.COM_DROP_DB;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		dropDB.write(buffer);
 		buffer.flip();

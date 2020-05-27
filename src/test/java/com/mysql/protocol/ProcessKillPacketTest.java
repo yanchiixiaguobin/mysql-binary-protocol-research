@@ -1,12 +1,13 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
+import com.mysql.protocol.packet.process.ProcessKillPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.HexUtil;
 
 /**
  * 

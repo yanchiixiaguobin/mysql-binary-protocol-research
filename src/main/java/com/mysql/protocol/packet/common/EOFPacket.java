@@ -2,21 +2,21 @@ package com.mysql.protocol.packet.common;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class EOFPacket extends MysqlPacket {
+public class EOFPacket extends MySQLPacket {
 
-	public byte header = (byte) 0xfe;
+	public byte header = (byte) 0xFE;
 	public int warningCount;
 	public int status = 2;
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		header = mm.read();
 		warningCount = mm.readUB2();
 		status = mm.readUB2();
@@ -26,7 +26,7 @@ public class EOFPacket extends MysqlPacket {
 	public void write(ByteBuffer buffer) {
 		int size = calcPacketSize();
 		BufferUtil.writeUB3(buffer, size);
-		buffer.put(packetId);
+		buffer.put(packetID);
 		buffer.put(header);
 		BufferUtil.writeUB2(buffer, warningCount);
 		BufferUtil.writeUB2(buffer, status);

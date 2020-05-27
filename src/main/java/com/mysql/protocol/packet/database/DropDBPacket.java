@@ -2,19 +2,19 @@ package com.mysql.protocol.packet.database;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class DropDBPacket extends MysqlPacket {
+public class DropDBPacket extends MySQLPacket {
 	public byte flag;
 	public byte[] schema;
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		flag = mm.read();
 		this.schema = mm.readBytes();
 	}
@@ -22,7 +22,7 @@ public class DropDBPacket extends MysqlPacket {
 	@Override
 	public void write(ByteBuffer buffer) {
 		BufferUtil.writeUB3(buffer, calcPacketSize());
-		buffer.put(packetId);
+		buffer.put(packetID);
 		buffer.put(COM_DROP_DB);
 		buffer.put(schema);
 	}

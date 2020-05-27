@@ -1,9 +1,17 @@
 package com.jiagu.mysql.CURD;
 
-import com.jiagu.mysql.protocol.*;
-import com.jiagu.mysql.protocol.util.ByteUtil;
-import com.jiagu.mysql.protocol.util.SecurityUtil;
-import org.junit.Test;
+import com.mysql.protocol.constant.Capabilities;
+import com.mysql.protocol.packet.QueryPacket;
+import com.mysql.protocol.packet.common.OKPacket;
+import com.mysql.protocol.packet.connect.AuthPacket;
+import com.mysql.protocol.packet.common.EOFPacket;
+import com.mysql.protocol.packet.connect.HandshakePacket;
+import com.mysql.protocol.packet.connect.QuitPacket;
+import com.mysql.protocol.packet.result.ColumnCountPacket;
+import com.mysql.protocol.packet.result.ColumnDefinitionPacket;
+import com.mysql.protocol.packet.result.ResultsetRowPacket;
+import com.mysql.protocol.util.ByteUtil;
+import com.mysql.protocol.util.SecurityUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -263,7 +271,7 @@ public class Query {
         System.arraycopy(rand2, 0, seed, rand1.length, rand2.length);
 
         AuthPacket auth = new AuthPacket();
-        auth.packetId = 1;
+        auth.packetID = 1;
         auth.clientFlags = getClientCapabilities();
         auth.maxPacketSize = 1024 * 1024 * 1024;
         auth.user = user;
@@ -307,7 +315,7 @@ public class Query {
     public byte[] produceQuit() {
         QuitPacket quit = new QuitPacket();
         quit.payload = 1;
-        quit.packetId = 0;
+        quit.packetID = 0;
         ByteBuffer buffer = ByteBuffer.allocate(256);
         quit.write(buffer);
         buffer.flip();

@@ -1,12 +1,13 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
+import com.mysql.protocol.packet.StatisticsPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.HexUtil;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class StatisticsPacketTest {
 	public void produce() {
 		StatisticsPacket statistics = new StatisticsPacket();
 		statistics.payload = 9;
-		statistics.packetId = 0;
+		statistics.packetID = 0;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		statistics.write(buffer);
 		buffer.flip();

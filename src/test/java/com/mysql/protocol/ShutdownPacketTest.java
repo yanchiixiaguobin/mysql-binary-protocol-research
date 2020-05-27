@@ -1,10 +1,11 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.connect.ShutdownPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -21,7 +22,7 @@ public class ShutdownPacketTest {
 	public void produce() {
 		ShutdownPacket shutdown = new ShutdownPacket();
 		shutdown.type = 0;
-		shutdown.packetId = 0;
+		shutdown.packetID = 0;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		shutdown.write(buffer);
 		buffer.flip();

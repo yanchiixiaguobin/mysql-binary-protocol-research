@@ -1,12 +1,13 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
+import com.mysql.protocol.packet.connect.QuitPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.HexUtil;
 
 /**
  * 
@@ -22,7 +23,7 @@ public class QuitPacketTest {
 	public void produce() {
 		QuitPacket quit = new QuitPacket();
 		quit.payload = 1;
-		quit.packetId = 0;
+		quit.packetID = 0;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		quit.write(buffer);
 		buffer.flip();

@@ -2,18 +2,18 @@ package com.mysql.protocol.packet.result;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class ColumnCountPacket extends MysqlPacket {
+public class ColumnCountPacket extends MySQLPacket {
 
 	public int columnCount;
 
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		this.packetLength = mm.readUB3();
-		this.packetId = mm.read();
+		this.packetID = mm.read();
 		this.columnCount = (int) mm.readLength();
 	}
 
@@ -21,7 +21,7 @@ public class ColumnCountPacket extends MysqlPacket {
 	public void write(ByteBuffer buffer) {
 		int size = calcPacketSize();
 		BufferUtil.writeUB3(buffer, size);
-		buffer.put(packetId);
+		buffer.put(packetID);
 		BufferUtil.writeLength(buffer, columnCount);
 	}
 

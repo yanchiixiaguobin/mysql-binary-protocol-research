@@ -2,11 +2,11 @@ package com.mysql.protocol.packet.connect;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class HandshakePacket extends MysqlPacket {
+public class HandshakePacket extends MySQLPacket {
 	private static final byte[] FILLER_13 = new byte[] { 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0 };
 
@@ -21,9 +21,9 @@ public class HandshakePacket extends MysqlPacket {
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		protocolVersion = mm.read();
 		serverVersion = mm.readBytesWithNull();
 		threadId = mm.readUB4();
@@ -50,7 +50,7 @@ public class HandshakePacket extends MysqlPacket {
 	@Override
 	public void write(ByteBuffer buffer) {
 		BufferUtil.writeUB3(buffer, calcPacketSize());
-		buffer.put(packetId);
+		buffer.put(packetID);
 		buffer.put(protocolVersion);
 		BufferUtil.writeWithNull(buffer, serverVersion);
 		BufferUtil.writeUB4(buffer, threadId);

@@ -1,10 +1,11 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.common.PingPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -21,7 +22,7 @@ public class PingPacketTest {
 	public void produce() {
 		PingPacket ping = new PingPacket();
 		ping.payload = 14;
-		ping.packetId = 0;
+		ping.packetID = 0;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		ping.write(buffer);
 		buffer.flip();

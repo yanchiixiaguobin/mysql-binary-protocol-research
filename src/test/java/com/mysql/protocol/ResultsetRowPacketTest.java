@@ -1,4 +1,4 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
@@ -6,7 +6,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.result.ResultsetRowPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -22,7 +23,7 @@ public class ResultsetRowPacketTest {
 	@Test
 	public void produce() {
 		ResultsetRowPacket resultsetRow = new ResultsetRowPacket(6);
-		resultsetRow.packetId = 0;
+		resultsetRow.packetID = 0;
 		List<byte[]> values = new ArrayList<byte[]>();
 		values.add("value1".getBytes());
 		values.add("value2".getBytes());

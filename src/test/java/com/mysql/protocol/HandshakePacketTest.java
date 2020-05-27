@@ -1,14 +1,17 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.CharsetUtil;
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.constant.Capabilities;
+import com.mysql.protocol.constant.Versions;
+import com.mysql.protocol.packet.connect.HandshakePacket;
+import com.mysql.protocol.util.CharsetUtil;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.RandomUtil;
+import com.mysql.protocol.util.RandomUtil;
 
 /**
  * 
@@ -30,7 +33,7 @@ public class HandshakePacketTest {
 		System.arraycopy(rand2, 0, seed, rand1.length, rand2.length);//上面两步主要是生成一个随机种子
 
 		HandshakePacket hs = new HandshakePacket();
-		hs.packetId = 0; //包的序列号
+		hs.packetID = 0; //包的序列号
 		hs.protocolVersion = Versions.PROTOCOL_VERSION; //协议号
 		hs.serverVersion = Versions.SERVER_VERSION; //版本号
 		hs.threadId = 1000; //当前线程编号

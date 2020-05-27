@@ -1,4 +1,4 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
@@ -8,9 +8,10 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 
+import com.mysql.protocol.packet.QueryPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.HexUtil;
 
 /**
  * 

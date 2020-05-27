@@ -1,10 +1,11 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.common.EOFPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -20,7 +21,7 @@ public class EOFPacketTest {
 	@Test
 	public void produce() {
 		EOFPacket eof = new EOFPacket();
-		eof.packetId = 1;
+		eof.packetID = 1;
 		eof.warningCount = 0;
 		eof.status = 2;
 		ByteBuffer buffer = ByteBuffer.allocate(256);

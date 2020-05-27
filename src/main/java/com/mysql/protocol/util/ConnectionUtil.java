@@ -75,7 +75,7 @@ public class ConnectionUtil {
         System.arraycopy(rand2, 0, seed, rand1.length, rand2.length);
 
         AuthPacket auth = new AuthPacket();
-        auth.packetId = 1;
+        auth.packetID = 1;
         auth.clientFlags = getClientCapabilities();
         auth.maxPacketSize = 1024 * 1024 * 1024;
         auth.user = user;
@@ -220,7 +220,7 @@ public class ConnectionUtil {
         return result;
     }
 
-    public static List<Map<String, String>> processResult2(InputStream inputStreams) {
+    public static List<Map<String, String>> processResult2ListMapString(InputStream inputStreams) {
         try {
             byte[] bytesTemp = new byte[1024 * 16];
             int len = inputStreams.read(bytesTemp);
@@ -246,12 +246,12 @@ public class ConnectionUtil {
             }
             return result;
         } catch (Exception e) {
-            LOG.debug("processResult failed", e);
+            LOG.debug("processResult2ListMapString failed", e);
             return null;
         }
     }
 
-    public static List<Map<String, Object>> processResult3(InputStream inputStreams) {
+    public static List<Map<String, Object>> processResult2ListMapObject(InputStream inputStreams) {
         try {
             byte[] bytesTemp = new byte[1024 * 16];
             int len = inputStreams.read(bytesTemp);
@@ -278,7 +278,7 @@ public class ConnectionUtil {
             }
             return result;
         } catch (Exception e) {
-            LOG.debug("processResult failed", e);
+            LOG.debug("processResult22ListMapObject failed", e);
             return null;
         }
     }

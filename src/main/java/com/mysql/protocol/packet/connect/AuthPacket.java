@@ -3,11 +3,11 @@ package com.mysql.protocol.packet.connect;
 import java.nio.ByteBuffer;
 
 import com.mysql.protocol.constant.Capabilities;
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class AuthPacket extends MysqlPacket {
+public class AuthPacket extends MySQLPacket {
 	private static final byte[] FILLER = new byte[23];
 
 	public long clientFlags;
@@ -20,9 +20,9 @@ public class AuthPacket extends MysqlPacket {
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		clientFlags = mm.readUB4();
 		maxPacketSize = mm.readUB4();
 		charsetIndex = (mm.read() & 0xff);
@@ -45,7 +45,7 @@ public class AuthPacket extends MysqlPacket {
 	@Override
 	public void write(ByteBuffer buffer) {
 		BufferUtil.writeUB3(buffer, calcPacketSize());
-		buffer.put(packetId);
+		buffer.put(packetID);
 		BufferUtil.writeUB4(buffer, clientFlags);
 		BufferUtil.writeUB4(buffer, maxPacketSize);
 		buffer.put((byte) 8);

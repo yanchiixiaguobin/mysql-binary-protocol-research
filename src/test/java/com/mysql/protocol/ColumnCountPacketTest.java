@@ -1,10 +1,11 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.result.ColumnCountPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -21,7 +22,7 @@ public class ColumnCountPacketTest {
 	public void produce() {
 		ColumnCountPacket columnCount = new ColumnCountPacket();
 		columnCount.columnCount = 6;
-		columnCount.packetId = 0;
+		columnCount.packetID = 0;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		columnCount.write(buffer);
 		buffer.flip();

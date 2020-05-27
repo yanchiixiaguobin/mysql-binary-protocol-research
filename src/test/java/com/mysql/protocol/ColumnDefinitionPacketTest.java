@@ -1,13 +1,14 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
+import com.mysql.protocol.packet.result.ColumnDefinitionPacket;
 import org.junit.Test;
 
-import com.jiagu.mysql.protocol.util.CharsetUtil;
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.util.CharsetUtil;
+import com.mysql.protocol.util.HexUtil;
 
 /**
  * 
@@ -23,7 +24,7 @@ public class ColumnDefinitionPacketTest {
 	public void produce() {
 
 		ColumnDefinitionPacket columnDefinition = new ColumnDefinitionPacket();
-		columnDefinition.packetId = 0;
+		columnDefinition.packetID = 0;
 		columnDefinition.schema = "testdb".getBytes();
 		columnDefinition.table = "table1".getBytes();
 		columnDefinition.orgTable = "orgTable1".getBytes();

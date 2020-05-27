@@ -2,11 +2,11 @@ package com.mysql.protocol.packet.common;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class OKPacket extends MysqlPacket {
+public class OKPacket extends MySQLPacket {
 	public static final byte HEADER = 0x00;
 	public byte header = HEADER;
 	public long affectedRows;
@@ -23,9 +23,9 @@ public class OKPacket extends MysqlPacket {
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		header = mm.read();
 		affectedRows = mm.readLength();
 		insertId = mm.readLength();
@@ -39,7 +39,7 @@ public class OKPacket extends MysqlPacket {
 	@Override
 	public void write(ByteBuffer buffer) {
 		BufferUtil.writeUB3(buffer, calcPacketSize());
-		buffer.put(packetId);
+		buffer.put(packetID);
 		buffer.put(header);
 		BufferUtil.writeLength(buffer, affectedRows);
 		BufferUtil.writeLength(buffer, insertId);

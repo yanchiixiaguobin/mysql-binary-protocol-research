@@ -4,11 +4,11 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class ResultsetRowPacket extends MysqlPacket {
+public class ResultsetRowPacket extends MySQLPacket {
 	private static final byte NULL_MARK = (byte) 251;
 	public int columnCount;
 	public List<byte[]> columnValues = new ArrayList<byte[]>();
@@ -23,9 +23,9 @@ public class ResultsetRowPacket extends MysqlPacket {
 
 	@Override
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		packetLength = mm.readUB3();
-		packetId = mm.read();
+		packetID = mm.read();
 		for (int i = 0; i < columnCount; i++) {
 			columnValues.add(mm.readBytesWithLength());
 		}
@@ -34,7 +34,7 @@ public class ResultsetRowPacket extends MysqlPacket {
 	@Override
 	public void write(ByteBuffer buffer) {
 		BufferUtil.writeUB3(buffer, calcPacketSize());
-		buffer.put(packetId);
+		buffer.put(packetID);
 		for (int i = 0; i < columnCount; i++) {
 			byte[] fv = columnValues.get(i);
 			if (fv == null) {

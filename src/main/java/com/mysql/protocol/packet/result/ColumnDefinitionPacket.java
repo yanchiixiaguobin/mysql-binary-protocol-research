@@ -2,11 +2,11 @@ package com.mysql.protocol.packet.result;
 
 import java.nio.ByteBuffer;
 
-import com.mysql.protocol.MysqlMessage;
-import com.mysql.protocol.packet.MysqlPacket;
+import com.mysql.protocol.MySQLMessage;
+import com.mysql.protocol.packet.MySQLPacket;
 import com.mysql.protocol.util.BufferUtil;
 
-public class ColumnDefinitionPacket extends MysqlPacket {
+public class ColumnDefinitionPacket extends MySQLPacket {
 	private static final byte[] DEFAULT_CATALOG = "def".getBytes();
 	private static final byte NEXT_LENGTH = 0x0c;
 	private static final byte[] FILLER = { 00, 00 };
@@ -27,9 +27,9 @@ public class ColumnDefinitionPacket extends MysqlPacket {
 	public byte[] defaultValues;
 
 	public void read(byte[] data) {
-		MysqlMessage mm = new MysqlMessage(data);
+		MySQLMessage mm = new MySQLMessage(data);
 		this.packetLength = mm.readUB3();
-		this.packetId = mm.read();
+		this.packetID = mm.read();
 		this.catalog = mm.readBytesWithLength();
 		this.schema = mm.readBytesWithLength();
 		this.table = mm.readBytesWithLength();
@@ -52,7 +52,7 @@ public class ColumnDefinitionPacket extends MysqlPacket {
 	public void write(ByteBuffer buffer) {
 		int size = calcPacketSize();
 		BufferUtil.writeUB3(buffer, size);
-		buffer.put(packetId);
+		buffer.put(packetID);
 		BufferUtil.writeWithLength(buffer, catalog, (byte) 0);
 		BufferUtil.writeWithLength(buffer, schema, (byte) 0);
 		BufferUtil.writeWithLength(buffer, table, (byte) 0);

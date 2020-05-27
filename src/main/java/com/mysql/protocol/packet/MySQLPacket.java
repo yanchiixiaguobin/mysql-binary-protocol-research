@@ -2,7 +2,7 @@ package com.mysql.protocol.packet;
 
 import java.nio.ByteBuffer;
 
-public abstract class MysqlPacket {
+public abstract class MySQLPacket {
 
 	public static final byte COM_SLEEP = 0;
 
@@ -64,7 +64,7 @@ public abstract class MysqlPacket {
 
 	public int packetLength;
 
-	public byte packetId;
+	public byte packetID;
 
 	public abstract int calcPacketSize();
 
@@ -77,7 +77,7 @@ public abstract class MysqlPacket {
 	@Override
 	public String toString() {
 		return new StringBuilder().append(getPacketInfo()).append("{length=")
-				.append(packetLength).append(",id=").append(packetId)
+				.append(packetLength).append(",id=").append(packetID)
 				.append('}').toString();
 	}
 

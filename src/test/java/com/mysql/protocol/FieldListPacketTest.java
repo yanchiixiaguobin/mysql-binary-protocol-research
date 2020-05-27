@@ -1,10 +1,12 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.MySQLPacket;
+import com.mysql.protocol.packet.table.FieldListPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -22,10 +24,10 @@ public class FieldListPacketTest {
 		byte[] table = { 't', 'e', 's', 't' };
 		byte[] fieldWildcard = { 'w', 'h', 'e', 'r', 'e' };
 		FieldListPacket fieldListPacket = new FieldListPacket();
-		fieldListPacket.packetId = 2;
+		fieldListPacket.packetID = 2;
 		fieldListPacket.table = table;
 		fieldListPacket.fieldWildcard = fieldWildcard;
-		fieldListPacket.flag = MysqlPacket.COM_FIELD_LIST;
+		fieldListPacket.flag = MySQLPacket.COM_FIELD_LIST;
 		ByteBuffer buffer = ByteBuffer.allocate(256);
 		fieldListPacket.write(buffer);
 		buffer.flip();

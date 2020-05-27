@@ -1,10 +1,11 @@
-package com.jiagu.mysql.protocol;
+package com.mysql.protocol;
 
 import static org.junit.Assert.assertTrue;
 
 import java.nio.ByteBuffer;
 
-import com.jiagu.mysql.protocol.util.HexUtil;
+import com.mysql.protocol.packet.common.OKPacket;
+import com.mysql.protocol.util.HexUtil;
 import org.junit.Test;
 
 /**
@@ -20,7 +21,7 @@ public class OKPacketTest {
 	@Test
 	public void produce() {
 		OKPacket ok = new OKPacket();
-		ok.packetId = 2;
+		ok.packetID = 2;
 		ok.affectedRows = 0;
 		ok.insertId = 0;
 		ok.serverStatus = 2;
